@@ -1,0 +1,49 @@
+.gradient-custom-2 {
+  background-color: black;
+}
+
+.gradient-form {
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+  }
+}
+
+/* Botón con degradado rojo a negro */
+.btn-gradient-red-black {
+  background: linear-gradient(to right, #d8363a, #000);
+  color: white;
+  border: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-gradient-red-black:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+/* Gradiente de fondo para el <h1> */
+.bg-gradient-black-red {
+  background: linear-gradient(to right, black, red, black);
+  color: white; /* Color del texto para destacar sobre el fondo */
+  padding: 1px; /* Espaciado interno para mejor visualización */
+  border-radius: 1px; /* Opcional: bordes redondeados */
+  text-align: center; /* Alinear texto al centro */
+}
+
+
+@media (max-width: 767px) {
+  .gradient-form {
+    padding: 20px;
+  }
+}
