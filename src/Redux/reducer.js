@@ -16,6 +16,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         USER: null,
+        STATUS:false
        
       }
 

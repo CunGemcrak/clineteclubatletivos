@@ -44,9 +44,8 @@ const Logueo = () => {
       //alert('Inicio de sesión exitoso');
       const validar = await  dispatch(logueoUser(email,password))
       if(validar === true){
-        alert('redireccionar')
-      }else{
-        alert('falla')
+       // alert('redireccionar')
+        navigate('/perfilusuario')
       }
     }
   };
