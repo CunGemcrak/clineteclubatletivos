@@ -97,3 +97,9 @@ export const registrarUser = (userData) => {
     }
   };
 };
+
+
+
+export const modificarUsuario =()=>{
+
+}

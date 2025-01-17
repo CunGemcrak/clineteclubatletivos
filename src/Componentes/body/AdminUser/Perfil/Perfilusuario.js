@@ -15,32 +15,42 @@ import {
   MDBListGroupItem
 } from 'mdb-react-ui-kit';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const Perfilusuario = ()=> {
   const ESTADOUSER = useSelector((state)=>state.USER || null)
   const LOGUEOUSER = useSelector((state)=>state.LOGINUSER || null)
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!ESTADOUSER || !LOGUEOUSER) {
+      navigate("/");
+    }
+  }, [ESTADOUSER, LOGUEOUSER, navigate]);
 
-  const [fields, setFields] = useState({
-    fullName: { value: "Johnatan Smith", isEditing: false },
-    email: { value: "example@example.com", isEditing: false },
-    phone: { value: "(097) 234-5678", isEditing: false },
-    mobile: { value: "(098) 765-4321", isEditing: false },
-    address: { value: "Bay Area, San Francisco, CA", isEditing: false },
-  });
 
-  const handleEditToggle = (field) => {
-    setFields({
-      ...fields,
-      [field]: { ...fields[field], isEditing: !fields[field].isEditing },
-    });
+
+ 
+
+
+
+  const [nombres, setNombres] = useState({ value: LOGUEOUSER.nombre, isEditing: false });
+  const [papellido, setPApellido] = useState({ value: LOGUEOUSER.papellido, isEditing: false });
+  const [sapellido, setSApellido] = useState({ value: LOGUEOUSER.sapellido, isEditing: false });
+  const [posicionjugador, setPosicionjugador] = useState({ value: LOGUEOUSER.posicion_jugador, isEditing: false });
+ 
+  
+
+
+   // Función para manejar cambios en los campos
+   const handleChange = (e, fieldSetter) => {
+    fieldSetter((prev) => ({ ...prev, value: e.target.value }));
   };
 
-  const handleChange = (e, field) => {
-    setFields({
-      ...fields,
-      [field]: { ...fields[field], value: e.target.value },
-    });
+  // Función para alternar el modo de edición
+  const handleEditToggle = (fieldSetter) => {
+    fieldSetter((prev) => ({ ...prev, isEditing: !prev.isEditing }));
   };
+
 
   return (
     <section style={{ backgroundColor: '#eee' }}>
@@ -64,7 +74,7 @@ const Perfilusuario = ()=> {
             <MDBCard className="mb-4">
               <MDBCardBody className="text-center">
                 <MDBCardImage
-                  src={LOGUEOUSER.imagen}
+                  src={LOGUEOUSER.imagen || 'https://res.cloudinary.com/dss2hdisa/image/upload/Toadette_Super_Mario_Bros._Wonder_yd1dop.webp'}
                   alt="avatar"
                   className="rounded-circle"
                   style={{ width: '150px' }}
@@ -72,11 +82,6 @@ const Perfilusuario = ()=> {
                   <p className="text-muted mb-1"> {LOGUEOUSER.nombre} {LOGUEOUSER.papellido} {LOGUEOUSER.sapellido}</p>
                   <p className="text-muted mb-1">Nivel: {LOGUEOUSER.nivel_jugador}</p>
                   <p className="text-muted mb-4">Posicion: {LOGUEOUSER.posicion_jugador}</p>
-                
-                <div className="d-flex justify-content-center mb-2">
-                  <MDBBtn>Editar</MDBBtn>
-                  <MDBBtn outline className="ms-1">Buscar</MDBBtn>
-                </div>
               </MDBCardBody>
             </MDBCard>
 
@@ -110,99 +115,197 @@ const Perfilusuario = ()=> {
           </MDBCol>
           <MDBCol lg="8">
           <MDBCard className="mb-4">
-      <MDBCardBody>
-        {Object.keys(fields).map((field, index) => (
-          <React.Fragment key={index}>
-            <MDBRow>
-              <MDBCol sm="3">
-                <MDBCardText>{field.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase())}</MDBCardText>
-              </MDBCol>
-              <MDBCol sm="6">
-                {fields[field].isEditing ? (
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={fields[field].value}
-                    onChange={(e) => handleChange(e, field)}
-                  />
-                ) : (
-                  <MDBCardText className="text-muted">{fields[field].value}</MDBCardText>
-                )}
-              </MDBCol>
-              <MDBCol sm="3">
-                <MDBBtn size="sm" onClick={() => handleEditToggle(field)}>
-                  {fields[field].isEditing ? "Actualizar" : "Editar"}
-                </MDBBtn>
-              </MDBCol>
-            </MDBRow>
-            <hr />
-          </React.Fragment>
-        ))}
+{
+  //!sdfsdf
+}
+<MDBCardBody>
+        {/* Campo 1 */}
+        <MDBRow>
+          <MDBCol sm="3">
+            <MDBCardText>Nombre</MDBCardText>
+          </MDBCol>
+          <MDBCol sm="6">
+            {nombres.isEditing ? (
+              <input
+                type="text"
+                className="form-control"
+                value={nombres.value}
+                onChange={(e) => handleChange(e, setNombres)}
+              />
+            ) : (
+              <MDBCardText className="text-muted">{nombres.value}</MDBCardText>
+            )}
+          </MDBCol>
+          <MDBCol sm="3">
+            <MDBBtn size="sm" onClick={() => handleEditToggle(setNombres)}>
+              {nombres.isEditing ? 'Actualizar' : 'Editar'}
+            </MDBBtn>
+          </MDBCol>
+        </MDBRow>
+        <hr />
+
+        {/* Campo 2 */}
+        <MDBRow>
+          <MDBCol sm="3">
+            <MDBCardText>Primer Apellido</MDBCardText>
+          </MDBCol>
+          <MDBCol sm="6">
+            {papellido.isEditing ? (
+              <input
+                type="text"
+                className="form-control"
+                value={papellido.value}
+                onChange={(e) => handleChange(e, setPApellido)}
+              />
+            ) : (
+              <MDBCardText className="text-muted">{papellido.value}</MDBCardText>
+            )}
+          </MDBCol>
+          <MDBCol sm="3">
+            <MDBBtn size="sm" onClick={() => handleEditToggle(setPApellido)}>
+              {papellido.isEditing ? 'Actualizar' : 'Editar'}
+            </MDBBtn>
+          </MDBCol>
+        </MDBRow>
+        <hr />
+
+        {/* Campo 3 */}
+        <MDBRow>
+          <MDBCol sm="3">
+            <MDBCardText>Segundo Apellido</MDBCardText>
+          </MDBCol>
+          <MDBCol sm="6">
+            {sapellido.isEditing ? (
+              <input
+                type="text"
+                className="form-control"
+                value={sapellido.value}
+                onChange={(e) => handleChange(e, setSApellido)}
+              />
+            ) : (
+              <MDBCardText className="text-muted">{sapellido.value}</MDBCardText>
+            )}
+          </MDBCol>
+          <MDBCol sm="3">
+            <MDBBtn size="sm" onClick={() => handleEditToggle(setSApellido)}>
+              {sapellido.isEditing ? 'Actualizar' : 'Editar'}
+            </MDBBtn>
+          </MDBCol>
+        </MDBRow>
+        <hr />
+
+        {/* Campo 4 */}
+        <MDBRow>
+          <MDBCol sm="3">
+            <MDBCardText>Jugador</MDBCardText>
+          </MDBCol>
+          <MDBCol sm="6">
+            {posicionjugador.isEditing ? (
+              <input
+                type="text"
+                className="form-control"
+                value={posicionjugador.value}
+                onChange={(e) => handleChange(e, setPosicionjugador)}
+              />
+            ) : (
+              <MDBCardText className="text-muted">{posicionjugador.value}</MDBCardText>
+            )}
+          </MDBCol>
+          <MDBCol sm="3">
+            <MDBBtn size="sm" onClick={() => handleEditToggle(setPosicionjugador)}>
+              {posicionjugador.isEditing ? 'Actualizar' : 'Editar'}
+            </MDBBtn>
+          </MDBCol>
+        </MDBRow>
+        <hr />
+
+        
       </MDBCardBody>
+      {
+      //!final
+      }
+
+
+
+
+      
     </MDBCard>
 
 
             <MDBRow>
-              <MDBCol md="6">
+            <MDBCol md="6">
+              <MDBCard className="mb-4 mb-md-0">
+                <MDBCardBody>
+                  <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Jugador:</span> Estadísticas en Campeonato de Béisbol</MDBCardText>
+
+                  <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Promedio de Bateo (BA)</MDBCardText>
+                  <MDBProgress className="rounded">
+                    <MDBProgressBar width={80} valuemin={0} valuemax={100} />
+                  </MDBProgress>
+                  <div className="text-end" style={{ fontSize: '.77rem' }}>0.320 (102 hits en 319 turnos al bate)</div>
+
+                  <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Carreras Anotadas (R)</MDBCardText>
+                  <MDBProgress className="rounded">
+                    <MDBProgressBar width={72} valuemin={0} valuemax={100} />
+                  </MDBProgress>
+                  <div className="text-end" style={{ fontSize: '.77rem' }}>80 carreras</div>
+
+                  <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Home Runs (HR)</MDBCardText>
+                  <MDBProgress className="rounded">
+                    <MDBProgressBar width={89} valuemin={0} valuemax={100} />
+                  </MDBProgress>
+                  <div className="text-end" style={{ fontSize: '.77rem' }}>40 home runs</div>
+
+                  <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Carreras Impulsadas (RBI)</MDBCardText>
+                  <MDBProgress className="rounded">
+                    <MDBProgressBar width={55} valuemin={0} valuemax={100} />
+                  </MDBProgress>
+                  <div className="text-end" style={{ fontSize: '.77rem' }}>120 RBI</div>
+
+                  <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Promedio de Fildeo (FPCT)</MDBCardText>
+                  <MDBProgress className="rounded">
+                    <MDBProgressBar width={66} valuemin={0} valuemax={100} />
+                  </MDBProgress>
+                  <div className="text-end" style={{ fontSize: '.77rem' }}>0.980 (65 de 66 intentos de fildeo exitosos)</div>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+
+            
+            <MDBCol md="6">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">assigment</span> Project Status</MDBCardText>
-                    <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Web Design</MDBCardText>
+                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Jugador:</span> Estadísticas en Campeonato de Béisbol</MDBCardText>
+
+                    <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Promedio de Bateo (BA)</MDBCardText>
                     <MDBProgress className="rounded">
                       <MDBProgressBar width={80} valuemin={0} valuemax={100} />
                     </MDBProgress>
+                    <div className="text-end" style={{ fontSize: '.77rem' }}>0.320 (102 hits en 319 turnos al bate)</div>
 
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Website Markup</MDBCardText>
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Carreras Anotadas (R)</MDBCardText>
                     <MDBProgress className="rounded">
                       <MDBProgressBar width={72} valuemin={0} valuemax={100} />
                     </MDBProgress>
+                    <div className="text-end" style={{ fontSize: '.77rem' }}>80 carreras</div>
 
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>One Page</MDBCardText>
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Home Runs (HR)</MDBCardText>
                     <MDBProgress className="rounded">
                       <MDBProgressBar width={89} valuemin={0} valuemax={100} />
                     </MDBProgress>
+                    <div className="text-end" style={{ fontSize: '.77rem' }}>40 home runs</div>
 
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Mobile Template</MDBCardText>
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Carreras Impulsadas (RBI)</MDBCardText>
                     <MDBProgress className="rounded">
                       <MDBProgressBar width={55} valuemin={0} valuemax={100} />
                     </MDBProgress>
+                    <div className="text-end" style={{ fontSize: '.77rem' }}>120 RBI</div>
 
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Backend API</MDBCardText>
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Promedio de Fildeo (FPCT)</MDBCardText>
                     <MDBProgress className="rounded">
                       <MDBProgressBar width={66} valuemin={0} valuemax={100} />
                     </MDBProgress>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-
-              <MDBCol md="6">
-                <MDBCard className="mb-4 mb-md-0">
-                  <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">assigment</span> Project Status</MDBCardText>
-                    <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Web Design</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={80} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Website Markup</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={72} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>One Page</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={89} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Mobile Template</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={55} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Backend API</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={66} valuemin={0} valuemax={100} />
-                    </MDBProgress>
+                    <div className="text-end" style={{ fontSize: '.77rem' }}>0.980 (65 de 66 intentos de fildeo exitosos)</div>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
