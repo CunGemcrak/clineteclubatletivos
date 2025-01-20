@@ -40,14 +40,13 @@ const Crearuncampeonato = () => {
   
     const numeros = '0123456789';
     const letras = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const especiales = '#$%*';
+  
   
     // Función para generar un ID único
     const generarIdUnico = async () => {
       const codigoFinal =
         generateRandomString(numeros, 3) +
-        generateRandomString(letras, 3) +
-        generateRandomString(especiales, 3);
+        generateRandomString(letras, 5) ;
   
       // Consultar si el ID ya existe utilizando dispatch
      // alert(codigoFinal)

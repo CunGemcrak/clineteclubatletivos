@@ -1,10 +1,11 @@
 import {
-  LOGIN, CERRARSESION
+  LOGIN, CERRARSESION, CAMPEONATOS
 } from "../Redux/action-types";
 
 const initialState = {
   ESTADO: false,
-  USER:null
+  USER:null,
+  CAMPEONATOS:null
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -43,6 +44,15 @@ const reducer = (state = initialState, { type, payload }) => {
           USER: true,  // Establecemos que el usuario está autenticado
         };
       
+
+
+
+        case CAMPEONATOS:
+          return {
+            ...state,
+            CAMPEONATOS:payload
+
+          }
 
       
     default:

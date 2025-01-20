@@ -8,6 +8,7 @@ import MyNavbar from './Componentes/NavMenu/Navmenu';
 import Verequipo from './Componentes/body/Equipos/Verequipo/Verequipo';
 import Crearequipo from './Componentes/body/Equipos/Crearequipo/Crearequipo';
 import Crearuncampeonato from './Componentes/body/Campeonatos/Crearcampeonato/Crearcampeonato';
+import Vercampeonatos from './Componentes/body/Campeonatos/Vercampeonatos/Vercampeonatos';
 
 
 
@@ -22,6 +23,7 @@ function App() {
        <Route path='/equipos/verequipo' element={<Verequipo/>}/>
        <Route path='/equipos/crear' element={<Crearequipo/>}/>
        <Route path='/campeonato/crear' element={<Crearuncampeonato/>}/>
+       <Route path='/campeonato/ver' element={<Vercampeonatos/>}/>
        
        </Routes>
       
