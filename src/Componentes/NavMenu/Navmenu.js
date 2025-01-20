@@ -24,19 +24,7 @@ const MyNavbar = () => {
 
   const [menuActivo, setMenuActivo] = useState(false)
 
-  // Solo se ejecuta una vez al cargar el componente
 
- /* useEffect(() => {
-    const allowedRoutes = ['/registrate', '/recuperarkey', '/usuario/recuperarkey'];
-    if (ESTADOUSER === null && !allowedRoutes.includes(location.pathname)) {
-      setMenuActivo(false);
-      navigate('/logueo'); // Redirigir al logueo si no está autorizado
-    } else if (ESTADOUSER === null) {
-      setMenuActivo(false);
-    } 
-  }, [ESTADOUSER, location.pathname, navigate]);
-
-*/
 
 useEffect(()=>{
   ESTADOUSER ? setMenuActivo(true):setMenuActivo(false)
@@ -96,13 +84,11 @@ const handleSalir = () => {
               onMouseLeave={() => setShowJugadoresDropdown(false)}
             >
               <Dropdown.Toggle as={Nav.Link} className="navbar-link underline">
-                Jugadores
+                Campeonato
               </Dropdown.Toggle>
               <Dropdown.Menu>
-              <Dropdown.Item as={NavLink} to='/jugadores/add'>Agregar Jugador</Dropdown.Item>
-              <Dropdown.Item as={NavLink} to="/jugadores/ver">Ver Lista</Dropdown.Item>
-              <Dropdown.Item as={NavLink} to="/jugadores/lineup">Line Up</Dropdown.Item>
-                
+              <Dropdown.Item as={NavLink} to='/campeonato/crear'>Crear</Dropdown.Item>
+              <Dropdown.Item as={NavLink} to='/campeonato/ver'>Ver </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
 
@@ -112,14 +98,15 @@ const handleSalir = () => {
               onMouseLeave={() => setShowJuegosDropdown(false)}
             >
               <Dropdown.Toggle as={Nav.Link} className="navbar-link underline">
-                Juegos
+                Equipo
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item as={NavLink} to="/Juegos/crearprogramacion">Crear Juego</Dropdown.Item>
+                <Dropdown.Item as={NavLink} to='/equipos/verequipos'>Equipos</Dropdown.Item>
+                <Dropdown.Item as={NavLink} to='/equipos/crear'>Crear Equipo</Dropdown.Item>
                { 
                 //!<Dropdown.Item as={NavLink} to="/juegos/juegosactivos">Ver Programacion</Dropdown.Item>
                 }
-                <Dropdown.Item as={NavLink} to='/juego/partido'>Seguir Juego</Dropdown.Item>
+                <Dropdown.Item as={NavLink} to='/equipos/verequipo'>Ver equipos</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
 
