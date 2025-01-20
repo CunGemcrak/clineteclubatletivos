@@ -2,8 +2,8 @@ import axios from "axios";
 import alertify from "alertifyjs";
 
 // URL base para las solicitudes
-//const url = 'https://admingemcrak.alwaysdata.net';
-const url ='http://localhost:3001'
+const url = 'https://admingemcrak.alwaysdata.net';
+//const url ='http://localhost:3001'
 
 export const campeonatoBuscarId = async (dato) => {
   try {
