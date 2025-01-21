@@ -4,8 +4,8 @@ import axios from "axios";
 import alertify from "alertifyjs";
 
 // URL base para las solicitudes
-//const url = 'https://admingemcrak.alwaysdata.net';
-const url ='http://localhost:3001'
+const url = 'https://admingemcrak.alwaysdata.net';
+//const url ='http://localhost:3001'
 
 export const campeonatoBuscarId = async (dato) => {
   try {
@@ -95,25 +95,27 @@ export const VerListaCampeonatos = (email) => {
   };
 };
 
-//!Elimnar Campeonato
-
+//! Eliminar Campeonato
 export const EliminarCampeonato = (idcampeonato, correoorganizador) => { 
+  return async (dispatch) => {
+    try {
+      // Usar encodeURIComponent dos veces para manejar caracteres especiales
+      const encodedId = encodeURIComponent(encodeURIComponent(idcampeonato));
+      const encodedCorreo = encodeURIComponent(encodeURIComponent(correoorganizador));
+      
+      const endpoint = `${url}/campeonato/eliminar/${encodedId}/${encodedCorreo}`;
 
-  return async (dispatch) =>{
-  try {
-    const endpoint = `${url}/campeonato/eliminar/${encodeURIComponent(idcampeonato)}/${encodeURIComponent(correoorganizador)}`;
+      const response = await axios.delete(endpoint);
+      alert(JSON.stringify(response.data))
+      dispatch({
+        type: CAMPEONATOS,
+        payload: response.data.campeonatos,
+      });
 
-    const response = await axios.delete(endpoint);
-
-    // Actualizar el estado con la lista de campeonatos devuelta
-    dispatch({
-      type: CAMPEONATOS,
-      payload: response.data.campeonatos,
-    });
-
-    alertify.success(response.data.message);
-  } catch (error) {
-    console.error("Error al eliminar el campeonato:", error.message);
-    alertify.error("Error al intentar eliminar el campeonato.");
-  }
-};}
+      alertify.success(response.data.message);
+    } catch (error) {
+      console.error("Error al eliminar el campeonato:", error.response?.data?.message || error.message);
+      alertify.error(error.response?.data?.message || "Error al intentar eliminar el campeonato.");
+    }
+  };
+};
