@@ -68,17 +68,19 @@ const Vercampeonatos = () => {
   const handleVerEquipos = () => {
     alertify.success("Ver equipos");
   };
-
+const handleFinalizar = ()=>{
+  alert("Finalizado")
+}
   return (
     <MDBContainer>
-      <h2 className="text-center my-4">Mis Campeonatos</h2>
+      <h2 className="text-center my-6">Mis Campeonatos</h2>
       <MDBRow>
         {CAMPEONATOS.length === 0 ? (
           <p className="text-center">No se encontraron campeonatos.</p>
         ) : (
           CAMPEONATOS.map((campeonato) => (
-            <MDBCol md="4" className="mb-4" key={campeonato.idcampeonato}>
-              <MDBCard style={{ width: "255px" }}>
+            <MDBCol md="4" className="mb-4 m-2" key={campeonato.idcampeonato}>
+              <MDBCard style={{ width: "300px" }}>
                 <MDBCardHeader>
                   <h5>{campeonato.nombrecampeonato}</h5>
                   <small>ID: {campeonato.idcampeonato}</small>
@@ -95,7 +97,7 @@ const Vercampeonatos = () => {
                     {campeonato.cantidadequipos || 0}
                   </p>
                 </MDBCardBody>
-                <MDBCardFooter className="d-flex justify-content-between">
+                <MDBCardFooter className="d-flex justify-content-between" title="Eliminar Campeonato">
                   <MDBBtn
                     color="danger"
                     size="sm"
@@ -110,12 +112,18 @@ const Vercampeonatos = () => {
                       setSelectedCampeonato(campeonato);
                       setNewFechaInicio(campeonato.fechainicio);
                     }}
+                    title="Actualizar Fecha de inicio"
                   >
                     <MDBIcon fas icon="edit" />
                   </MDBBtn>
-                  <MDBBtn color="info" size="sm" onClick={handleVerEquipos}>
-                    Ver equipos
+                  <MDBBtn color="danger" size="sm" onClick={handleFinalizar} title="Finalizar Campeonato">
+                    <MDBIcon fas icon="flag-checkered" className="me-2" /> 
                   </MDBBtn>
+
+                  <MDBBtn color="info" size="sm" title="Ver Equipos" onClick={handleVerEquipos}>
+                    <MDBIcon color="green" size="50" icon="baseball-ball" />
+                  </MDBBtn>
+                  
                 </MDBCardFooter>
               </MDBCard>
             </MDBCol>
@@ -141,8 +149,11 @@ const Vercampeonatos = () => {
           <MDBCard style={{ width: "400px" }}>
             <MDBCardBody>
               <h5>Actualizar Fecha de Inicio</h5>
-              <p>
+              <p style={{textAlign:'justify'}}>
                 <strong>Campeonato:</strong> {selectedCampeonato.nombrecampeonato}
+              </p>
+              <p style={{textAlign:'justify'}}>
+              Cambio la fecha del campeonato Actualizala aquí:
               </p>
               <MDBInput
                 type="date"

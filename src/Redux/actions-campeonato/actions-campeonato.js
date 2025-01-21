@@ -63,13 +63,14 @@ export const VerListaCampeonatos = (email) => {
   return async (dispatch) => {
     try {
       // Construir el endpoint con el correo organizador en la query string
-      alert("Entro" + email)
+    //  alert("Entro" + email)
       const endpoint = `${url}/campeonato/campeonatosorganizador?correoorganizador=${encodeURIComponent(email)}`;
 
       // Realizar la solicitud GET
       const response = await axios.get(endpoint);
 
       // Verificar si el backend devolvió el resultado esperado
+      alert(JSON.stringify(response.data))
       if (response && response.data) {
         // Dispatch para guardar los datos en el store
         dispatch({
